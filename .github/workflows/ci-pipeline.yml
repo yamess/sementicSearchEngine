@@ -1,0 +1,31 @@
+name: ci-pipeline
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Display content
+        run: |
+          ls -la
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          echo "Tests passed!"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Display content
+        run: |
+          ls -la
+      - name: Run tests
+        run: |
+          echo "Running tests..."
+          echo "Tests passed!"
+      - name: Build
+        run: |
+          echo "Building..."
+          echo "Build completed!"

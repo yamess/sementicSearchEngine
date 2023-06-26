@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  vector-db:
+    image: qdrant/qdrant:latest
+    container_name: vector-db
+    ports:
+      - "${VECTOR_DB_PORT}:${VECTOR_DB_PORT}"
+      - "${VECTOR_DB_GRPC_PORT}:${VECTOR_DB_GRPC_PORT}"
+    env_file:
+      - .env
+    volumes:
+      - vector_db:/data
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    hostname: azurite
+    restart: always
+    command: "azurite-blob --blobHost 0.0.0.0 --blobPort 10000"
+    ports:
+      - "10000:10000"
+      - "10001:10001"
+    volumes:
+      - azurite:/data
+
+volumes:
+  vector_db:
+  azurite:
